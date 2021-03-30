@@ -480,8 +480,6 @@ class tsp:
         return (min(bestScore1, bestScore2), mean)
 
 
-bests = []
-means = []
 
 for i in range(50):
     myTSPproblem = tsp()
