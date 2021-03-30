@@ -12,5 +12,5 @@ Project was created with Python 3.8.
 # Figures
 As it is an probabilistic algorithm, we can expect little bit different results every time we run the algorithm. <br/>
 This are the outcomes for the smallest problem.
-![Best scores in 1000 runs](Genetic_algorithms_TSP/1000BEST29.jpg)
-![Mean scores for the whole population in 1000 runs](Genetic_algorithms_TSP/1000MEANS29.jpg)
+![Best scores in 1000 runs](./1000BEST29.jpg)
+![Mean scores for the whole population in 1000 runs](./1000MEANS29.jpg)
