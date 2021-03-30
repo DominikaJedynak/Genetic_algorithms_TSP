@@ -1,15 +1,12 @@
-import Reporter
 import random
 import numpy as np
 import time
 import matplotlib.pyplot as plt
 from multiprocessing import Process, Queue
 
-# Modify the class name to match your student number.
-class r0826058:
+class tsp:
 
 	def __init__(self):
-		self.reporter = Reporter.Reporter(self.__class__.__name__)
 		self.populationSize1 = 300
 		self.offspringSize1 = 600
 		self.populationSize2 = 160
@@ -390,7 +387,6 @@ class r0826058:
 		self.distanceMatrix = np.loadtxt(file, delimiter=",")
 		file.close()
 
-		# Your code here.
 
 		numberOfNodes = self.distanceMatrix.shape[0]
 		candidateList1 = self.initialisation(numberOfNodes, self.populationSize1)
@@ -417,18 +413,9 @@ class r0826058:
 		bestScore2 = fitnesses2[indexMin2]
 		bestIndividual2 = candidateList2[indexMin2]
 
-		if bestScore1 < bestScore2:
-			timeLeft = self.reporter.report(mean, bestScore1, bestIndividual1)
-			#print(mean, bestScore1, bestIndividual1)
-		else:
-			timeLeft = self.reporter.report(mean, bestScore2, bestIndividual2)
-			#print(mean, bestScore2, bestIndividual2)
 
 		k = self.startk
 		a = self.alpha
-		if min(bestScore1,bestScore2) - 27154.48839924464 <= 0.00000000001:
-			print(min(bestScore1, bestScore2), mean)
-			return (min(bestScore1, bestScore2), mean)
 
 		while True:
 
@@ -481,27 +468,10 @@ class r0826058:
 			a -= self.stepa
 			self.lap += 1
 
-			# Call the reporter with:
-			#  - the mean objective function value of the population
-			#  - the best objective function value of the population
-			#  - a 1D numpy array in the cycle notation containing the best solution
-			#    with city numbering starting from 0
-
-			if bestScore1 < bestScore2:
-				timeLeft = self.reporter.report(mean, bestScore1, bestIndividual1)
-				print(bestScore1, bestIndividual1)
-			else:
-				timeLeft = self.reporter.report(mean, bestScore2, bestIndividual2)
-				print(bestScore2, bestIndividual2)
-
-			if min(bestScore1, bestScore2) - 27154.48839924464 <= 0.00000000001:
+		
+			end = time.time()
+			if end-self.start >= 300:
 				break
-
-			if timeLeft < 0:
-				break
-			#end = time.time()
-			#if end-self.start >= 300:
-			#	break
 
 		print(min(bestScore1,bestScore2),mean)
 		return (min(bestScore1,bestScore2),mean)
@@ -511,7 +481,7 @@ bests = []
 means = []
 
 for i in range(50):
-	myTSPproblem = r0826058()
+	myTSPproblem = tsp()
 	b, m = myTSPproblem.optimize("tour100.csv")
 	bests.append(b)
 	means.append(m)
